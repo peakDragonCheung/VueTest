@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <style>
+        #mydiv{
+            width: 300px;
+            height: 300px;
+            border: solid black 2px;
+        }
+
+        button{
+            margin: 50px;
+        }
+
+    </style>
+</head>
+<body>
+  <div id="mydiv" >
+      <input type="text" v-model="name" placeholder="请输入需要颠倒的字符串">
+      <p > 正常顺序: {{ name }}</p>
+      <p>  反转顺序: {{ rever }} </p>
+  </div>
+
+</body>
+<script>
+        var vm = new Vue({
+            el:'#mydiv',
+            data:{
+            name:''
+            },
+            computed:{
+                rever:function(){
+                    return this.name.split('').reverse().join('');
+                }
+            }
+        });
+        
+    </script>
+</html>

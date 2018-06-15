@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <style>
+        #mydiv{
+            width: 300px;
+            height: 300px;
+            border: solid black 2px;
+        }
+
+        button{
+            margin: 50px;
+        }
+        .div1{
+            outline: 5px solid red;
+        }
+        .div2{
+            box-shadow: 0 0 0 10px yellow;
+        }
+    </style>
+</head>
+<body>
+  <div id="mydiv" 
+  v-bind:class = 'classObject' >
+  <h1 v-if = 'ok'>Yes</h1>
+  <h1 v-else>NO</h1>
+  <template v-if = 'ok'>
+     <div v-if = 'type === "A" ' >AAAA</div>
+     <div v-else-if = 'type === "B" '>BBBB</div>
+     <div v-else-if = 'type === "C" '>CCCC</div>
+     <div v-else>NOT ABC</div>
+  </template>
+  </div>
+
+</body>
+<script>
+        var vm = new Vue({
+            el:'#mydiv',
+            data:{
+                classObject:{
+                    div1:true,
+                    div2:true
+                },
+                ok:true,
+                type:'A'
+            }
+        });
+        
+    </script>
+</html>

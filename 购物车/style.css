@@ -1,0 +1,195 @@
+.outDiv {
+            width: 900px;
+            border: solid #dedede 1px;
+            border-top: solid #00A2E8 2px;
+            margin: auto;
+            margin-top: 50px;
+
+        }
+
+        .titleName {
+            display: inline-block;
+            position: relative;
+            color: #00A2E8;
+            font-size: 18px;
+            height: 50px;
+            line-height: 50px;
+            left: 20px;
+        }
+        .menuDiv {
+            width: 900px;
+            height: 40px;
+            border: solid #dedede 1px;
+            border-left: 0;
+            border-right: 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .menuDiv span {
+            display: inline-block;
+            margin: 8px
+        }
+
+        .kindMenu1 {
+            width: 505px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .kindMenu2 {
+            width: 510px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .kindMenu2 label{
+            line-height: 100px;
+            color: red;
+            width: 100px;
+            text-align: center;
+        }
+        .kindMenu2 span{
+            width: 100px;
+            line-height: 100px;
+            text-align: center;
+            color: red;
+        }
+        .contentDiv {
+            height: 100px;
+            display: flex;
+            justify-content: space-between;
+            margin: 40px;
+            margin-right: 9px;
+            margin-left: 15px
+        }
+
+        .kindMenu3 {
+            width: 350px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .img {
+            border: solid 1px #dedede;
+            margin-left: 25px;
+            margin-right: 30px
+        }
+
+        .checkBox {
+            margin-top: auto;
+            margin-bottom: auto;
+            margin-left: 10px;
+            width: 18px;
+            height: 18px;
+            /* display: none; */
+        }
+        .checkBox+label{
+            background-color: white;
+            border-radius: 5px;
+            border: 1px solid #d3d3d3;
+            width: 18px;
+            height: 18px;
+            display: inline-block;
+            text-align: center;
+            vertical-align: bottom;
+            line-height: 18px;
+        }
+
+        .checkBox:checked+label {
+            background-color: #eee;
+        }
+
+        .allChecked:checked+label:after {
+            content: "\2714";
+        }
+
+        .footDiv {
+            height: 20px;
+            display: flex;
+            justify-content: space-between;
+            margin: 30px;
+        }
+        .computedBox{
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            font-style: normal;
+            color: black;
+            cursor: pointer;
+        }
+        .numberBox{
+            display: inline-block;
+            width: 30px;
+            height: 18px;
+            font-style: normal;
+            color: black;
+        }
+        .numbersBoxs{
+            line-height: 108px;
+        }
+        .subcried{
+            width: 500px;
+            display: flex;
+            justify-content: space-between
+        }
+        .footDiv span{
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+        }
+        .overcomputed{
+            width: 100px;
+            height: 40px;
+            border-radius: 8px;
+            background: #00A2E8;
+            color: white;
+            cursor: pointer;
+        }
+        .someBoxs{
+            height:30px;
+            border: 1px solid #dedede;
+            border-bottom: 0;
+        }
+        .deleteChoice{
+            cursor: pointer;
+        }
+        :focus{
+            outline: 0;
+        }
+
+        #allChecked{
+            display: none;
+        }
+        #allChecked+label{
+            background-color: white;
+            border-radius: 5px;
+            border: 1px solid #d3d3d3;
+            width: 18px;
+            height: 18px;
+            display: inline-block;
+            text-align: center;
+            vertical-align: bottom;
+            line-height: 18px;
+        }
+        #allChecked:checked+label {
+            background-color: #eee;
+        }
+
+        #allChecked:checked+label:after {
+            content: "\2714";
+        }
+
+        .contentDiv2{
+            height: 600PX;
+            overflow-x:auto;
+            overflow-y:auto  
+        }
+
+        [v-cloak] {
+            opacity: 0;
+          }
+          body{
+              user-select: none;/* 去除自动蓝色选择 */
+          }
+          

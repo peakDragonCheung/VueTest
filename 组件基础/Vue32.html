@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+    <script src="../../jquery.min.js"></script>
+    <style>
+        #mydiv {
+            width: 300px;
+            height: 300px;
+            border: solid pink 50px;
+            background: pink;
+            margin: auto;
+            margin-top: 50px;
+        }
+
+        button {
+            margin: 30px;
+        }
+
+        .div1 {
+            outline: 30px solid red;
+            border-radius: 50px ;
+        }
+
+        .div2 {
+            box-shadow: 0 0 0 25px red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mydiv" v-bind:class='someClass'>
+        <blog-title v-for ='item in posts' v-bind:title = item.title v-bind:post = item.post1></blog-title>
+    </div>
+
+    
+</body>
+<script>
+  Vue.component('blog-title',{
+      data:function (){
+          return {
+              count: 0
+          }
+      },
+      props:['title','post'],
+      template:`<div>
+            <h3>{{title}}</h3>
+        <textarea>{{post}}</textarea>
+        </div>`
+  });
+
+  var vm = new Vue({
+      el:'#mydiv',
+      data:{
+          someClass:{
+              div1:true,
+              div2:true
+          },
+          posts:[
+              {title:'天龙八部',post1:'9'},
+              {title:'易筋经',post1:'9'},
+              {title:'九阳真经',post1:'9'},
+          ]
+      }
+  })
+</script>
+
+</html>

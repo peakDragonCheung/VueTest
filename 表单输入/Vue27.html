@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+    <script src="../../jquery.min.js"></script>
+    <style>
+        #mydiv {
+            width: 300px;
+            height: 300px;
+            border: solid black 2px;
+        }
+
+        button {
+            margin: 50px;
+        }
+
+        .div1 {
+            outline: 5px solid red;
+        }
+
+        .div2 {
+            box-shadow: 0 0 0 10px yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mydiv" v-bind:class='someClass'>
+        <input type="checkbox" name="" id="ji" v-model = 'checked'>
+        <label for="ji">ji</label>
+        <input type="checkbox" id="basketball" value="篮球" v-model ='checkNames' >
+        <label for="basketball">篮球</label>
+        <input type="checkbox" id="pingpang" value="乒乓球"  v-model ='checkNames'>
+        <label for="pingpang">乒乓球</label>
+        <input type="checkbox" id="football" value="足球"  v-model ='checkNames'>
+        <label for="football">足球</label>
+        <p>我的checkNames: {{checkNames}}</p>
+        <p>{{checked}}</p>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#mydiv',
+        data: {
+            someClass: {
+                div1: true,
+                div2: true
+            },
+            checkNames:[],
+            checked:true
+        },
+        methods: {
+        }
+    });
+
+    // $(document).keydown(function (event) {
+    //     　　　　if (event.keyCode == 13) {
+    //         　　　　　　alert('你按下了Enter');
+    //     　　　　}
+    // });
+</script>
+
+</html>

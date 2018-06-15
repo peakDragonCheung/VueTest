@@ -1,0 +1,26 @@
+.backgroundDiv{
+    width: 400px;
+    height: 300px;
+    border: solid 1px #dedede;
+    margin: auto;
+    margin-top: 40px;
+}
+.buttonList{
+    display: flex;
+    height: 30px;
+}
+ label{
+    width: 100px;
+    height: 30px;
+    background: #dedede;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+}
+.focuse{
+    background: #00A2E8;
+    color: white
+}
+:focus{
+    outline: 0;
+}

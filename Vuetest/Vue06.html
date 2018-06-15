@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <script src="../jquery.min.js"></script>
+    <script src="../lodash.js"></script>
+
+    <style>
+        #mydiv {
+            width: 300px;
+            height: 300px;
+            border: solid black 2px;
+        }
+
+        button {
+            margin: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mydiv">
+        <p>输入一个yes/no的question</p>
+        <input type="text" v-model='question' placeholder="请输入">
+        <p>{{answer}}</p>
+    </div>
+
+</body>
+<script>
+    var vm = new Vue({
+        el: '#mydiv',
+        data: {
+            question: '',
+            answer: '我不能给你一个答案直到你询问问题了!'
+        },
+        watch: {
+            question: function (newQuestion, oldQuestion) {
+                //调用弹性函数，使其重复修改text的值的时候，一定时间内不会立马调用，重置时间。
+                this.answer = '等待你停止编辑........';
+                if(this.question == '')
+                {
+                    this.answer = '我不能给你一个答案直到你询问问题了!';
+                    return;
+                }else{
+                    this.debouncedGetAnswer();
+                }
+                
+            }
+        },
+        created: function () {
+            this.debouncedGetAnswer = _.debounce(this.getAnswer, 1000);
+        },
+        methods: {
+            //相应的处理函数
+            getAnswer: function () {
+                if (this.question.indexOf('?') === -1) {
+                    this.answer = "问题必须要以问号结尾";
+                    return;
+                }
+                this.answer = '思考中';
+                var vm = this;
+                $.ajax({
+                    url: 'https://yesno.wtf/api',
+                    type: 'get',
+                    success: function (res) {
+                        vm.answer = _.capitalize(res.answer)
+                    },
+                    error: function (err) {
+                        vm.answer = '对不起找不到对应接口. ' + err;
+                    }
+                });
+            }
+        }
+    });
+</script>
+</html>

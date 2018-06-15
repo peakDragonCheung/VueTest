@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="choiceButton" class="backgroundDiv">
+        <div class="buttonList">
+            <label v-for='item in allButtons' v-bind:class = '{focuse: flagName===item.btnName}' v-on:click='flagName = item.btnName'>{{item.btnName}}</label>
+        </div>
+        <p>{{pName}}</p>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el:'#choiceButton',
+        data:{
+            allButtons:[
+                {
+                    btnName:'html',
+                },
+                {
+                    btnName:'css',
+                },
+                {
+                    btnName:'javascript',
+                },
+                {
+                    btnName:'vue',
+                }
+            ],
+            flagName:''
+        },
+        computed:{
+            pName:function(){
+                return this.flagName;
+            }
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <style>
+        #mydiv{
+            width: 300px;
+            height: 300px;
+            border: solid black 2px;
+        }
+
+        button{
+            margin: 50px;
+        }
+    </style>
+</head>
+<body>
+  <div id="mydiv" >
+    <button v-on:click = 'doSome' >按钮</button>
+
+    <form action="http://www.baidu.com" method="GET"  v-on:submit.prevent = "onSubmit" >
+        <input type="submit" value="提交" >
+    </form>
+  </div>
+
+</body>
+<script>
+        var vm = new Vue({
+            el:'#mydiv',
+            data:{
+            name:'zhang',
+            ralhtml:'<div style="color: red">this shi my span</div>',
+            doSome:function(){
+                alert('点击事件被触发了');
+            }
+        }
+    });
+        
+    </script>
+</html>

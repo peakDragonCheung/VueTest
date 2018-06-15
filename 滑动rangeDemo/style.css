@@ -1,0 +1,71 @@
+.chartDiv{
+    width: 600px;
+    height: 250px;
+    border: 2px solid paleturquoise;
+    margin: auto;
+    margin-bottom: 10px
+}
+
+.dragDiv{
+    width: 600px;
+    height: 250px;
+    border: 2px solid paleturquoise;
+    margin: auto;
+    
+}
+
+.div1 {
+    width: 400px;
+    height: 30px;
+    margin: auto;
+    margin-top:20px; 
+    margin-bottom: 10px;
+}
+
+.div1 .sliSpan1 {
+    width: 350px;
+    height: 30px;
+    background: #dedede;
+    border-radius: 8px;
+    margin-top: 10px;
+    display: inline-block;
+    position: absolute;
+}
+
+.div1 .sliSpan2 {
+    width: 50%;
+    height: 30px;
+    background: #00A2E8;
+    border-radius: 8px;
+    display: inline-block;
+    position: absolute;
+}
+
+.div1 #textSpan {
+    position: relative;
+    top: 14px;
+    right: 10px;
+}
+
+.div1 #scoreSpan {
+    position: relative;
+    top: 14px;
+    left: 400px;
+}
+
+.mySange{
+    width: 350px;
+    height: 30px;
+    margin-left: 100px;
+    margin-top:20px;
+}
+.rangeSub{
+    position: relative;
+    bottom: 10px;
+    left: 90px;
+}
+.rangeScro{
+    position: relative;
+    left: 47px;
+    bottom: 10px;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <style>
+        #mydiv {
+            width: 300px;
+            height: 300px;
+            border: solid black 2px;
+        }
+
+        button {
+            margin: 50px;
+        }
+
+        .div1 {
+            outline: 5px solid red;
+        }
+
+        .div2 {
+            box-shadow: 0 0 0 10px yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mydiv" class='div1 div2'>
+        <ul id="myUl">
+            <li v-for='item of result'>
+                {{item}}
+            </li>
+        </ul>
+        <button onclick="changeItems()">点击修改数据项</button>
+    </div>
+
+</body>
+<script>
+    var vm = new Vue({
+        el: '#myUl',
+        data: {
+            items:[5,-6,8,-5,3,-5,-10]
+        },
+        computed:{
+            result:function (){
+                return this.items.filter(function(item){
+                    return item > 0;
+                }); 
+            }
+        }
+});
+    
+    function changeItems() {
+    }   
+</script>
+
+</html>

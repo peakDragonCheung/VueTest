@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <style>
+        #mydiv{
+            width: 300px;
+            height: 300px;
+            border: solid black 2px;
+        }
+
+        button{
+            margin: 50px;
+        }
+
+    </style>
+</head>
+<body>
+  <div id="mydiv" >
+      <p>  正常顺序: {{ firstName }}</p>
+      修改firstName: <input type="text" v-model = 'firstName'><br><br>
+      <p>  反转顺序: {{ lastName }} </p>
+      修改lastName: <input type="text" v-model = 'lastName'>
+      <p>name的值:{{name}}</p>
+  </div>
+
+</body>
+<script>
+        var vm = new Vue({
+            el:'#mydiv',
+            data:{
+            firstName: 'first' ,
+            lastName: 'last' ,
+            name:''
+            },
+            watch:{
+                firstName:function(val){
+                    if(val==''&&this.lastName=='')
+                    {
+                        this.name = '';
+                        return;
+                    };
+                    if(val==''&&this.lastName!='')
+                    {
+                        this.name = this.lastName;
+                        return;
+                    }
+                    if(val!=''&&this.lastName=='')
+                    {
+                        this.name = val;
+                        return;
+                    }
+                    this.name = val + '-and-' + this.lastName;
+                },
+                lastName:function (val){
+                    if(val==''&&this.firstName=='')
+                    {
+                        this.name = '';
+                        return;
+                    };
+                    if(val==''&&this.firstName!='')
+                    {
+                        this.name = this.firstName;
+                        return;
+                    };
+                    if(val!=''&&this.firstName=='')
+                    {
+                        this.name = val;
+                        return;
+                    }
+                    this.name = this.firstName + '-and-' +val;
+                }
+            }
+        });
+        
+    </script>
+</html>

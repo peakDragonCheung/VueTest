@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body> <div id="mydiv">
+    <div id="chartDiv" class="chartDiv">
+            <slice-div v-for='item in subjects' :key = 'item.sName' :subname = 'item.sName' :subscroe = 'item.sScroe'>
+                </slice-div>
+    </div>
+    <div id="dragDiv" class="dragDiv">
+        <sub-range v-for = 'item in subjects'  :key = 'item.sName' :subname = 'item.sName' :subscroe = 'item.sScroe' v-on:change = 'item.sScroe = $event'></sub-range>
+    </div>
+</div>
+</body>
+<script>
+
+    Vue.component('slice-div',{
+        props:['subname','subscroe'],
+        template:`<div class="div1">
+            <span id="textSpan">{{subname}}</span>
+            <span class="sliSpan1">
+                <span class="sliSpan2" v-bind:style='{ "width": subscroe + "%"}'></span>
+            </span>
+            <span id="scoreSpan">{{subscroe}}</span>
+        </div>`
+    });
+
+    Vue.component('sub-range',{
+        data:function(){
+            return{
+                subRange:this.subscroe
+            }
+        },
+        props:['subname','subscroe'],
+        template: ` <div>
+                <span class="rangeSub">{{subname}}</span> 
+                <input type="range" class="mySange"  v-model ='subRange' v-on:input = '$emit("change",subRange)'>
+                <span class="rangeScro">{{subscroe}}</span>
+        </div>`,
+    });
+
+    var vm = new Vue({
+        el:'#mydiv',
+        data:{
+            range:0,
+            subjects:[
+                {
+                    sName:'语文',
+                    sScroe: 85
+                },
+                {
+                    sName:'数学',
+                    sScroe: 70
+                },
+                {
+                    sName:'英语',
+                    sScroe: 85
+                },
+                {
+                    sName:'历史',
+                    sScroe: 40
+                }
+            ]
+        },
+    });
+</script>
+</html>

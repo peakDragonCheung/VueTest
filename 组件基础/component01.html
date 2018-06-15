@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+    <style>
+        #testDiv {
+            width: 300px;
+            height: 300px;
+            margin: auto;
+            margin-top: 50px;
+            border-radius: 15px;
+            background: yellow;
+            border: 5px solid yellow;
+            outline: 15px solid palevioletred;
+            box-shadow: 0 0 0 10px palevioletred;
+        }
+
+        button {
+            margin: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="testDiv">
+        <simple-text @input = 'someText = $event' v-model = 'someText'> </simple-text>
+    </div>
+</body>
+<script>
+
+    Vue.component('simple-text', {
+        data: function () {
+            return {
+                count: 0
+            }
+        },
+        props:['value'],
+        template: ` <input v-on:input = '$emit("input", $event.target.value)'> :value = value `
+    });
+
+    var vm = new Vue({
+        el: '#testDiv',
+        data: {
+            count: 1,
+            someText:''
+        }
+    });
+</script>
+
+</html>

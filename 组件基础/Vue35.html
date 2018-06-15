@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+    <script src="../../jquery.min.js"></script>
+    <style>
+        #mydiv {
+            width: 600px;
+            height: 600px;
+            border: solid pink 50px;
+            background: pink;
+            margin: auto;
+            margin-top: 50px;
+        }
+
+        button {
+            margin: 30px;
+        }
+
+        .div1 {
+            outline: 30px solid red;
+            border-radius: 50px;
+        }
+
+        .div2 {
+            box-shadow: 0 0 0 25px red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mydiv" v-bind:class='someClass'>
+        <div v-bind:style='{ fontSize: postFontSize + "em"}'>
+            <blog-title >
+            </blog-title>
+            <button v-on:click='$emit("text-enlage")'>扩大字体</button>
+        </div>
+        <!-- 直接在一个事件的内部添加一个事件，但是其中的代码必须是可识别的方法如Vue实例方法。必须是子组件触发事件，父组件才能接受到不然接受不到 -->
+    </div>
+
+
+</body>
+<script>
+    Vue.component('blog-title', {
+        data: function () {
+            return {
+                count: 0
+            }
+        },
+        props: ['title', 'post'],
+        template: `<div>
+            <h3>{{title}}</h3>
+        <textarea>{{post}}</textarea>
+        <button v-on:click = '$emit("text-enlage")'>扩大字体</button>
+        </div>`//首先模板里面的字符是没有办法访问vm实例中属性，
+        //并且模板中的事件方法必须使用Vue里面的实例方法自带的，例如$emit() 方法抛出事件使其发生，好在父组件进行响应
+    });
+
+    var vm = new Vue({
+        el: '#mydiv',
+        data: {
+            someClass: {
+                div1: true,
+                div2: true
+            },
+            posts: [
+                { title: '天龙八部', post1: '9' },
+                { title: '易筋经', post1: '9' },
+                { title: '九阳真经', post1: '9' },
+            ],
+            postFontSize: 1
+        }
+    })
+</script>
+
+</html>

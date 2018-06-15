@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    
+</head>
+<body>
+    <div id="mydiv" style="border: solid 2px red ; width: 300px; height: 300px">
+        <p> {{name}} </p>
+        <p><span v-html='ralhtml'></span></p><br>
+        <input type="text" v-model='name' > 
+        <p v-if='false'>你可以看见我了</p>
+    </div>
+</body>
+<script>
+        var vm = new Vue({
+            el:'#mydiv',
+            data:{
+            name:'zhang',
+            ralhtml:'<div style="color: red">this shi my span</div>'
+        }
+    });
+        
+    </script>
+</html>

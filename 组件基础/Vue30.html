@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+    <script src="../../jquery.min.js"></script>
+    <style>
+        #mydiv {
+            width: 300px;
+            height: 300px;
+            border: solid black 2px;
+        }
+
+        button {
+            margin: 30px;
+        }
+
+        .div1 {
+            outline: 5px solid red;
+        }
+
+        .div2 {
+            box-shadow: 0 0 0 10px yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mydiv" v-bind:class='someClass'>
+        <button-count></button-count>
+        <button-count></button-count>
+        <button-count></button-count>
+    </div>
+</body>
+<script>
+  Vue.component('button-count',{
+      data:function (){
+          return {
+              count: 0
+          }
+      },
+      template:'<button v-on:click = "count++"> 第{{count}}次</button>'
+  });
+
+  var vm = new Vue({
+      el:'#mydiv',
+      data:{
+          someClass:{
+              div1:true,
+              div2:true
+          }
+      }
+  })
+</script>
+
+</html>

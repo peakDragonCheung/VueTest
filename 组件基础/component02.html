@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+    <style>
+        #testDiv {
+            width: 300px;
+            height: 300px;
+            margin: auto;
+            margin-top: 50px;
+            border-radius: 15px;
+            background: yellow;
+            border: 5px solid yellow;
+            outline: 15px solid palevioletred;
+            box-shadow: 0 0 0 10px palevioletred;
+        }
+
+        .smallDiv {
+            width: 100px;
+            height: 100px;
+            margin: auto;
+            margin-top: 50px;
+            border-radius: 5px;
+            background: palegreen;
+            outline: 6px solid palevioletred;
+            box-shadow: 0 0 0 4px palevioletred;
+        }
+
+        button {
+            margin: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="testDiv">
+        <alert-box>电脑出现问题</alert-box>
+    </div>
+
+    
+</body>
+<script>
+
+    Vue.component('alert-box', {
+        data: function () {
+            return {
+                count: 0
+            }
+        },
+        props:['value'],
+        template: `<div class = 'smallDiv'>
+        <strong>ERROR!</strong>
+        <slot></slot>
+    </div>`
+    });
+
+    var vm = new Vue({
+        el: '#testDiv',
+        data: {
+            count: 1,
+            someText:''
+        }
+    });
+</script>
+
+</html>
