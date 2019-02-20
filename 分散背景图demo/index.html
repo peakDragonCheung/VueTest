@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+        @keyframes flexleft {
+        from {
+          opacity: 0;
+          left: -500px;
+        }
+        to {
+          opacity: 1;
+          left: 0px;
+        }
+      }
+      @-webkit-keyframes flexleft /* Safari 和 Chrome */ {
+        from {
+          opacity: 0;
+          left: -500px;
+        }
+        to {
+          opacity: 1;
+          left: 0px;
+        }
+      }
+      @keyframes flexright {
+        from {
+          opacity: 0;
+          right: -500px;
+        }
+        to {
+          opacity: 1;
+          right: 0px;
+        }
+      }
+      @-webkit-keyframes flexright /* Safari 和 Chrome */ {
+        from {
+          opacity: 0;
+          right: -500px;
+        }
+        to {
+          opacity: 1;
+          right: 0px;
+        }
+      }
+      .bgImg {
+        width: 605px;
+        height: 375px;
+        /* background-image: url("./img/bgDemo.jpg"); */
+        /* background-size: 1024px 582px; */
+        background: black;
+        margin: 0 auto;
+        font-size: 0;
+        overflow: hidden;
+        /* position: absolute; */
+      }
+      .bgImg i {
+        background-image: url("./img/cqe.jpg");
+        background-size: 605px 375px;
+        display: inline-block;
+        position: relative;
+        opacity: 0;
+        animation-name: flexleft;
+        animation-delay: 0s;
+        animation-duration: 3s;
+        animation-fill-mode : forwards;
+        -webkit-animation-duration: 3s;
+        -webkit-animation-name: flexleft;
+        -webkit-animation-delay: 0s;
+        -webkit-animation-fill-mode : forwards;
+      }
+      .single1Img {
+        width: 100px;
+        height: 50px;
+        background-position: 0 0;
+      }
+      .single2Img {
+        width: 100px;
+        height: 50px;
+        background-position: -100px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bgImg"></div>
+    <div class="imgBack2"></div>
+  </body>
+  <script>
+    const bgDom = document.querySelector(".bgImg");
+    const outWd = bgDom.clientWidth;
+    const outHd = bgDom.clientHeight;
+    const iWd = outWd / 10;
+    const ihd = outHd / 5;
+    var ele = new DocumentFragment();
+    for (let i = 0; i < 5; i++) {
+        // let leftN = 0;
+        // let rightN = 0;
+        // leftN ++;
+        // rightN ++;
+      for (let j = 0; j < 10; j++) {
+        let iele = document.createElement("i");
+        iele.style.width = iWd + "px";
+        iele.style.height = ihd + "px";
+        // 算出当前方块在背景图的位置，使背景图移动可展示的位置。
+        iele.style.backgroundPosition = `-${j * iWd}px -${i * ihd}px`;
+        if(j <= 4) {
+            iele.style.animationName = 'flexleft';
+            // leftN += 0.2;
+            iele.style.animationDelay = Math.random(0,4) + 's';
+        } else {
+            iele.style.animationName = 'flexright';
+            // rightN += 0.2;
+            iele.style.animationDelay = Math.random(0,4) + 's';
+        }
+        ele.appendChild(iele);
+      }
+    }
+    bgDom.appendChild(ele);
+    //     var testOj = {
+    //         de1: {
+    //             name: 'de1',
+    //             age: 18
+    //         },
+    //         de2: {
+    //             name: function(name) {
+    //                 return 'this' + name;
+    //             },
+    //             age: 15,
+    //             friend: [1,2,3,5]
+    //         },
+    //         de3: {
+    //             childen1: {
+    //                 name: 'childen1'
+    //             }
+    //         },
+    //         name: 'testOj'
+    //     };
+    //     function isObject(object) {
+    //         return (object && typeof object === 'object')
+    //     }
+    //    function deepClone(object) {
+    //        if(!isObject(object)) {
+    //         throw 'not a valid Object'
+    //        }
+    //        if(Array.isArray(object)) {
+    //         var newOj = [];
+    //         for (const value of object) {
+    //             if(isObject(value)) {
+    //                 newOj.push(deepClone(value));
+    //             } else {
+    //                 newOj.push(value);
+    //             }
+    //         }
+    //        } else if (typeof object === 'object') {
+    //         var newOj = {};
+    //         for (const key in object) {
+    //             if (object.hasOwnProperty(key)) {
+    //                 if(object[key] && typeof object[key] === 'object') {
+    //                 newOj[key] = deepClone(object[key]);
+    //                 } else {
+    //                 newOj[key] = object[key];
+    //                 }
+    //             }
+    //         }
+    //        }
+    //         return newOj;
+    //     }
+    //     var deepOj = deepClone(testOj);
+    //     testOj.de1 = '5555'
+    //     console.log(testOj.de1);
+    //     console.log(deepOj.de1);
+    //     testOj.de2.friend.push(99);
+    //     console.log(testOj.de2.friend);
+    //     console.log(deepOj.de2.friend);
+    //     console.dir(testOj);
+    //     console.log(deepOj);
+
+    // var arr = [ [1, 2, 2], [3, 4, 5, 5], [6, 7, 8, 9, [11, 12, [12, 13, [14] ] ] ], 10];
+    // function quchongSort(arr) {
+    //    let temp = new Set(arr);
+    //    return Array.from(temp).sort((a, b) => a - b);
+    // }
+    // function cleanArray (array) {
+    //     if(!Array.isArray(array)) {
+    //         throw 'this is not Array!'
+    //     }
+    //     var testArray = []
+    //     for (const item of array) {
+    //         if(Array.isArray(item)) {
+    //             testArray = testArray.concat(cleanArray(item))
+    //         } else {
+    //             testArray.push(item)
+    //         }
+    //     }
+    //     return quchongSort(testArray);
+    // }
+    // var result = cleanArray(arr);
+    // Array.prototype.flat= function() {
+    //     debugger
+    //     var result = [].concat(...this.map(item => (Array.isArray(item) ? item.flat() : [item])));
+    //     return result;
+    // }
+    // console.log(result);
+
+    // Function.prototype._call = function (_this) {
+    //     // es6 写法
+    // 	_this = _this || window;
+    // 	_this.fn = this;
+    //     var arr = Array.from(arguments);
+    //     arr.shift();
+    // 	var result = _this.fn(...arr);
+    // 	delete _this.fn;
+    // 	return result;
+    // }
+
+    // function sayHello(age) {
+    // 	console.log(this.name + 'age');
+    // }
+    // var ob = {
+    // name: '张三'
+    // }
+    // sayHello._call(ob,50);
+
+    // function _new(fn, ...arg) {
+    //     if(typeof fn !== 'function') {
+    //         throw `${fn} not a function`;
+    //     }
+    //     var oj = Object.create(fn.prototype);
+    //     var result = fn.apply(oj,arg) || 'null';
+    //     return typeof result === 'object'? result:oj;
+    // }
+    // function people(name,age) {
+    //     this.name = name;
+    //     this.age = age;
+    // }
+    // let zhang = _new(people, 'zhang','18');
+    // console.log(zhang.name + ':' + zhang.age);
+
+    // 模拟bind用法。
+    // Function.prototype._bind = function(_this) {
+    //     if(typeof this !== 'function') {
+    //         throw new Error('this is not function!');
+    //     }
+    //     var self = this;
+    //     var args = Array.prototype.slice.call(arguments, 1);
+    //     var fn = function() {
+    //         self.apply(this instanceof fn ? this : _this , args.concat(arguments));
+    //     }
+    //     fn.prototype = new self();
+    //     return fn;
+    // }
+    // function sayHello(num) {
+    //     this.num = num;
+    //     console.log(this.name + ':' + this.age + ':' + num);
+    // }
+    // var oj = {
+    //     name: 'zhang',
+    //     age: 15
+    // };
+    // var _sayHello = sayHello._bind(oj);
+    // _sayHello();
+  </script>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue测试</title>
+    <script src="../../vue.js"></script>
+    <script src="../../jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="mydiv">
+        <blog-post post-title='hello!' :title= '18' ></blog-post>
+        <blog-post  :arrpigs = 'pigs' ></blog-post>
+        <blog-post  :post-Title = 'pigs[0]'></blog-post>
+        <blog-post  v-bind= 'simpleData' ></blog-post>
+
+    
+    </div>
+</body>
+
+<script>
+    Vue.component('blog-post', {
+        props: {
+            'postTitle': String,
+            'title': Number,
+            'arrpigs':Array,
+            'name':'',
+            'age':''
+        },
+        template: '<h3>{{postTitle}} this is {{title}} name:{{name}} age:{{age}}</h3>'
+    })
+    var vm = new Vue({
+        el: '#mydiv',
+        data:{
+            simpleData:{
+                name:'zhangsan',
+                age:18
+            },
+            Id:123456,
+            pigs:['bigPig','midPig','smallPig']
+        }
+    });
+</script>
+
+</html>
