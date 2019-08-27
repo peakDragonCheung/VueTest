@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .canvasBox{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid red;
+        width: 1000px;
+        height: 500px;
+        margin: 0 auto;
+    }
+    canvas{
+        border: 1px solid black;
+    }
+    </style>
+</head>
+<body>
+    <div class="canvasBox">
+        <canvas id="clockBall" width="500" height="300"></canvas>
+    </div>
+</body>
+<script>
+    
+    class Ball{
+        constructor(x,y,radius,color,xv = 0,yv = 0) {
+            this.x = x;
+            this.y = y;
+            this.radius = radius;
+            this.color = color;
+            this.xv = xv,
+            this.yv = yv
+        }
+        drawBall(ctx) {
+            ctx.beginPath();
+            ctx.arc(this.x,this.y,this.radius,0,Math.PI*2,true);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+        }
+        FreeFall(a) {
+        // 定义水平速度向右为正，竖直方向向下为正, 1表示每一帧，
+        this.x += (this.xv*1);
+        this.y += (this.yv*1 + a*a*0.5);
+        this.yv += a;
+        return this;
+        }
+        reboundBall(cw,ch) {
+            // cw 为画布的宽，ch为画布的高
+            if(this.y > ch || this.y < 0) {
+                console.log(this.yv);
+                this.yv = -this.yv*0.7;
+            }
+            // 横向不管了，后面加入一个优化。超过屏幕外的不给进行绘制。
+            return this;
+        }
+        setXv(val) {
+            this.xv = val;
+        }
+    }
+    class numBall{
+        constructor(num) {
+            (num>=0&&num<10)?'':console.error('num的大小在0-9之间');
+            this.num = num;
+            this.ballArray = []
+        }
+        getArray() {
+            const numStore = {
+                0: [
+                    [1,1,1],
+                    [1,0,1],
+                    [1,0,1],
+                    [1,0,1],
+                    [1,1,1]
+                ],
+                1: [
+                    [0,1,0],
+                    [1,1,0],
+                    [0,1,0],
+                    [0,1,0],
+                    [1,1,1]
+                ],
+                2: [
+                    [1,1,1],
+                    [0,0,1],
+                    [1,1,1],
+                    [1,0,0],
+                    [1,1,1]
+                ],
+                3: [
+                    [1,1,1],
+                    [0,0,1],
+                    [1,1,1],
+                    [0,0,1],
+                    [1,1,1] 
+                ],
+                4: [
+                    [1,0,1],
+                    [1,0,1],
+                    [1,1,1],
+                    [0,0,1],
+                    [0,0,1] 
+                ],
+                5: [
+                    [1,1,1],
+                    [1,0,0],
+                    [1,1,1],
+                    [0,0,1],
+                    [1,1,1]
+                ],
+                6: [
+                    [1,1,1],
+                    [1,0,0],
+                    [1,1,1],
+                    [1,0,1],
+                    [1,1,1]
+                ],
+                7: [
+                    [1,1,1],
+                    [0,0,1],
+                    [0,1,0],
+                    [0,1,0],
+                    [0,1,0]
+                ],
+                8: [
+                    [1,1,1],
+                    [1,0,1],
+                    [1,1,1],
+                    [1,0,1],
+                    [1,1,1]
+                ],
+                9: [
+                    [1,1,1],
+                    [1,0,1],
+                    [1,1,1],
+                    [0,0,1],
+                    [1,1,1]
+                ]
+            }
+            return numStore[this.num];
+        }
+        // 使用二维数组来存储数字，40px为一个单位进行绘制。
+        drawNumBall(ctx,xAxis,yAxis,radius,color) {
+            const numArray = this.getArray();
+            const yLength = numArray.length;
+            const xLength = numArray[0].length;
+            for(let i = 0; i< yLength; i++) {
+                for(let j = 0; j< xLength; j++) {
+                    if(numArray[i][j]) {
+                        const teBal = new Ball(xAxis+(j*40),yAxis+(i*40),radius,color);
+                        teBal.drawBall(ctx);
+                        this.ballArray.push(teBal);
+                    }
+                }
+            }
+        }
+    }
+    function draw() {
+        ctx.clearRect(0,0,500,300);
+        new numBall(num).drawNumBall(ctx,50,50,15,'#cccccc');
+        new numBall(2).drawNumBall(ctx,190,50,15,'#cccccc');
+        new numBall(0).drawNumBall(ctx,330,50,15,'#cccccc');
+        colorBallArray.forEach(boll => {
+            boll.FreeFall(0.2).reboundBall(485,285).drawBall(ctx);
+        })
+        time = requestAnimationFrame(draw);
+    }
+    function cloneColorBall (ball, color) {
+        let xv = Math.random()*10 - 5;
+        const colorBall = new Ball(0,0,0,0,0,0);
+        Object.assign(colorBall,ball,{color});
+        colorBall.setXv(xv/8);
+        return colorBall;
+    }
+    function createRangdomColor() {
+        return `rgb(${Math.random()*(255-0)+0},${Math.random()*(255-0)+0},${Math.random()*(255-0)+0})`;
+    }
+    const clock = document.querySelector('#clockBall');
+    var ctx = clock.getContext('2d');
+    new numBall(2).drawNumBall(ctx,190,50,15,'#cccccc');
+    new numBall(0).drawNumBall(ctx,330,50,15,'#cccccc');
+
+    let num = 0;
+    const colorBallArray = [];
+    const timess = setInterval(() => {
+        if(num >= 9) {
+            num = 0;
+        }
+        const numball0 = new numBall(num);
+        numball0.drawNumBall(ctx,50,50,15,'#cccccc');
+        numball0.ballArray.map(ball => {
+            colorBallArray.push(cloneColorBall(ball, createRangdomColor()));
+        })
+        num++;
+    }, 1000)
+    let xAxis = 330, yAxis = 50;
+    let time = null;
+    const redball = new Ball(50,50,15,'red',0.5,0);
+    redball.drawBall(ctx);
+    time = requestAnimationFrame(draw);
+
+    // 设计一个函数用来计算小球下一时刻的位置，并且根据小球当前位置进行计算。
+    window.addEventListener('message',function(e){
+    // if(e.source!=window.parent) return;
+    //e.data即是我们从A传来的数据 这里使用localStorage进行存贮（请勿使用sessionStorage）
+    localStorage.setItem("tokenData",e.data);
+    alert(e.data);
+    },false);
+</script>
+</html>
