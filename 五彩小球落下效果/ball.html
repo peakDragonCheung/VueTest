@@ -22,7 +22,7 @@
 </head>
 <body>
     <div class="canvasBox">
-        <canvas id="clockBall" width="500" height="300"></canvas>
+        <canvas id="clockBall" width="500" height="500"></canvas>
     </div>
 </body>
 <script>
@@ -46,14 +46,16 @@
         // 定义水平速度向右为正，竖直方向向下为正, 1表示每一帧，
         this.x += (this.xv*1);
         this.y += (this.yv*1 + a*a*0.5);
+        this.reboundBall(485,485);
         this.yv += a;
         return this;
         }
         reboundBall(cw,ch) {
             // cw 为画布的宽，ch为画布的高
-            if(this.y > ch || this.y < 0) {
+            if(this.y >= ch) {
                 console.log(this.yv);
                 this.yv = -this.yv*0.7;
+                this.y = ch;
             }
             // 横向不管了，后面加入一个优化。超过屏幕外的不给进行绘制。
             return this;
@@ -160,32 +162,40 @@
         }
     }
     function draw() {
-        ctx.clearRect(0,0,500,300);
+        ctx.clearRect(0,0,500,500);
         new numBall(num).drawNumBall(ctx,50,50,15,'#cccccc');
         new numBall(2).drawNumBall(ctx,190,50,15,'#cccccc');
         new numBall(0).drawNumBall(ctx,330,50,15,'#cccccc');
+        let EffectiveBalls = [];
         colorBallArray.forEach(boll => {
-            boll.FreeFall(0.2).reboundBall(485,285).drawBall(ctx);
+            boll.FreeFall(0.3).drawBall(ctx);
+            if(boll.x > -15 && boll.x < 515) {
+                EffectiveBalls.push(boll);
+            }
         })
+        colorBallArray = EffectiveBalls.slice(0);
         time = requestAnimationFrame(draw);
     }
+
     function cloneColorBall (ball, color) {
         let xv = Math.random()*10 - 5;
         const colorBall = new Ball(0,0,0,0,0,0);
         Object.assign(colorBall,ball,{color});
-        colorBall.setXv(xv/8);
+        colorBall.setXv(xv/4);
         return colorBall;
     }
+
     function createRangdomColor() {
         return `rgb(${Math.random()*(255-0)+0},${Math.random()*(255-0)+0},${Math.random()*(255-0)+0})`;
     }
+
     const clock = document.querySelector('#clockBall');
     var ctx = clock.getContext('2d');
     new numBall(2).drawNumBall(ctx,190,50,15,'#cccccc');
     new numBall(0).drawNumBall(ctx,330,50,15,'#cccccc');
 
     let num = 0;
-    const colorBallArray = [];
+    let colorBallArray = [];
     const timess = setInterval(() => {
         if(num >= 9) {
             num = 0;
@@ -203,12 +213,5 @@
     redball.drawBall(ctx);
     time = requestAnimationFrame(draw);
 
-    // 设计一个函数用来计算小球下一时刻的位置，并且根据小球当前位置进行计算。
-    window.addEventListener('message',function(e){
-    // if(e.source!=window.parent) return;
-    //e.data即是我们从A传来的数据 这里使用localStorage进行存贮（请勿使用sessionStorage）
-    localStorage.setItem("tokenData",e.data);
-    alert(e.data);
-    },false);
 </script>
 </html>
